@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="fps-counter" class="fpscounter" style="position:absolute;left:0;top:0">123</div>
+<script src="sekki.js"></script>
+<script src="code.js"></script>
+<script>
+
+  sekki.start({
+    "width":1800,
+    "height":900,
+    "style": {
+      "border":"2px solid #cdcdcd"
+    }
+  });
+  sekki.addTools({
+    'figures': [
+      'cube'
+    ]
+  }).ToolsSettings(function(array,mousePos) {
+    let ctx = array[0].canvas.ctx;
+    array.clicked = "cube";
+    if(array.clicked = "cube") {
+    ctx.beginPath();
+    ctx.rect(mousePos.x,mousePos.y,100,100);
+    ctx.stroke();
+    }
+    return;
+  });
+
+  sekki.fps();
+
+  var i = 0;
+  var j = 0;
+
+/*  var inter = setInterval(function(){
+    if(i < 10) {
+      sekki.createObject((5 * i + j) + 100,(5*j) + 100,'cube',100,100,1);
+      j++;
+      if(j === 10) {
+        i++;
+        j = 0;
+      }
+      if(i === 10) {
+        clearTimeout(inter);
+      }
+    }
+  },10); */
+
+ for(let i = 0; i < 10; i++) {
+    for(let j = 0; j < 10; j++) {
+      sekki.createObject(300 + i * j, 300 + j + i,'circle',100,100,100);
+    }
+  }
+
+/*  function inRad(num)  {
+    return num * Math.PI / 180;
+  } */
+
+  setInterval(function(){
+    if(i < 100) {
+      i++;
+          sekki.changeObjectSettings('circle',i);
+    }
+    if(i === 100) {
+      i = 0;
+          sekki.changeObjectSettings('circle',i);
+    }
+
+},1000/60);
+
+</script>
+</body>
+</html>
